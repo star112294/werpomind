@@ -13,8 +13,103 @@
     <meta property="og:url" content="https://werpomind-fpp2nmro.manus.space/">
     <meta property="og:title" content="Werpomind - Digital Creator">
     <meta property="og:description" content="A professional digital creator portfolio.">
+    <style>
+        /* Custom styles for the blog section */
+        #blog-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .blog-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .blog-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .blog-card h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .blog-date {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-bottom: 1rem;
+        }
+        .blog-excerpt {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #4a5568;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #4a5568;
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
+    
+    <!-- Blog Section -->
+    <section id="blog-section">
+        <h2 class="blog-title">Latest Blog Posts</h2>
+        <div id="blog-posts" class="blog-grid">
+            <!-- Posts will be loaded here -->
+            <p>Loading blog posts...</p>
+        </div>
+    </section>
+
+    <script>
+        // Fetch and display blog posts from blog.json
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('./blog.json');
+                if (!response.ok) throw new Error('Failed to load blog.json');
+                const posts = await response.json();
+                
+                const blogContainer = document.getElementById('blog-posts');
+                blogContainer.innerHTML = ''; // Clear loading message
+
+                posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.className = 'blog-card';
+                    postElement.innerHTML = `
+                        <h3>${post.title}</h3>
+                        <div class="blog-date">${post.date}</div>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <a href="#" class="read-more" onclick="alert('${post.content.replace(/'/g, "\\'")}'); return false;">Read More</a>
+                    `;
+                    blogContainer.appendChild(postElement);
+                });
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                document.getElementById('blog-posts').innerHTML = '<p>Sorry, could not load blog posts at this time.</p>';
+            }
+        }
+
+        // Load posts when the page is ready
+        window.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
 </body>
 </html>

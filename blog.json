@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome to My New Blog!",
+    "date": "2026-04-11",
+    "excerpt": "This is my very first blog post on my new website. I'm so excited to share my journey with you!",
+    "content": "Welcome to my new blog! This is where I'll be sharing my thoughts, experiences, and tips on personal growth and digital creation. Stay tuned for more updates!"
+  },
+  {
+    "id": 2,
+    "title": "How to Stay Productive",
+    "date": "2026-04-12",
+    "excerpt": "Productivity is key to success. Here are some of my favorite tips to help you stay focused and get things done.",
+    "content": "Productivity isn't about doing more; it's about doing what matters. In this post, I'll share my top three productivity hacks: 1. Prioritize your tasks. 2. Take regular breaks. 3. Minimize distractions."
+  }
+]
